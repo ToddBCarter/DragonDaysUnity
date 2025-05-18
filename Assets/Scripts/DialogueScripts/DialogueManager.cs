@@ -9,11 +9,11 @@ public class DialogueManager : MonoBehaviour
 {
 	public static DialogueManager Instance { get; private set; }
 
-	public GameObject DialogueParent;
-	public TMP_Text DialogueTitleText;
-	public TMP_Text DialogueBodyText;
-	public GameObject responseButtonPrefab;
-	public Transform responseButtonContainer;
+	//public GameObject DialogueParent;
+	//public TMP_Text DialogueTitleText;
+	//public TMP_Text DialogueBodyText;
+	//public GameObject responseButtonPrefab;
+	//public Transform responseButtonContainer;
 
 	//public GameEventsManager gameEventsManager;
 
