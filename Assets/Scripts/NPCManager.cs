@@ -27,7 +27,6 @@ public class NPCManager : MonoBehaviour
 
 	public bool isHostile;
 
-	
     //Start is currently being used to:
 	// - find rigidbody component
 	// - find animator component
