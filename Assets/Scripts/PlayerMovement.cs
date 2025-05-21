@@ -44,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
 				Flip();
 			}
 
+			//anim.SetFloat("horizontal", Mathf.Abs(horizontal));
+			//anim.SetFloat("vertical", Mathf.Abs(vertical));
+			
 			anim.SetFloat("horizontal", horizontal); //This gives -1 to 1 for x
 			anim.SetFloat("vertical", vertical); //This gives -1 to 1 for y
 			
