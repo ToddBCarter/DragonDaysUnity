@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
 
-public class NPCManager : MonoBehaviour
+public class NPCController : MonoBehaviour
 {
 	public float speed = 2;
 	public float attackRange = 1;
@@ -74,7 +74,7 @@ public class NPCManager : MonoBehaviour
 		{
 			//If enemy is hostile, they pursue and attack.
 			//They can be turned back by way of dialogue manager (or other classes)
-			//by using .GetComponent<NPCManager>().switchHostility().
+			//by using .GetComponent<NPCController>().switchHostility().
 			if(isHostile == true)
 			{
 				enemyAttack();

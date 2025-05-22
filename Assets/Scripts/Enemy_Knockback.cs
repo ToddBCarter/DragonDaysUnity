@@ -4,12 +4,12 @@ using System.Collections;
 public class Enemy_Knockback : MonoBehaviour
 {
 	private Rigidbody2D rb;
-	private NPCManager enemyMovement;
+	private NPCController enemyMovement;
 
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		enemyMovement = GetComponent<NPCManager>();
+		enemyMovement = GetComponent<NPCController>();
 	}
 
     public void Knockback(Transform playerTransform, float knockbackForce, float stunTime)

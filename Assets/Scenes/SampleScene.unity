@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 36312791}
   m_Layer: 0
   m_Name: Floor_Plank_0 (2)
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3300,7 +3300,7 @@ GameObject:
   - component: {fileID: 579121990}
   m_Layer: 0
   m_Name: Floor_Plank_0 (1)
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9247,7 +9247,7 @@ GameObject:
   - component: {fileID: 1068658959}
   m_Layer: 0
   m_Name: Floor_Plank_0
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12113,7 +12113,7 @@ GameObject:
   - component: {fileID: 1385101478}
   m_Layer: 0
   m_Name: Floor_Plank_0 (1)
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12200,7 +12200,7 @@ GameObject:
   - component: {fileID: 1386239383}
   m_Layer: 0
   m_Name: Floor_Plank_0 (1)
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12339,7 +12339,7 @@ GameObject:
   - component: {fileID: 1412905247}
   m_Layer: 0
   m_Name: Floor_Plank_0
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12426,7 +12426,7 @@ GameObject:
   - component: {fileID: 1427603411}
   m_Layer: 0
   m_Name: Floor_Plank_0 (2)
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14447,7 +14447,7 @@ GameObject:
   - component: {fileID: 2001655810}
   m_Layer: 0
   m_Name: Floor_Plank_0 (2)
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14608,7 +14608,7 @@ GameObject:
   - component: {fileID: 2048885774}
   m_Layer: 0
   m_Name: Floor_Plank_0
-  m_TagString: Untagged
+  m_TagString: WoodenPlank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

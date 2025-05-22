@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
 	public Animator healthTextAnim;
 
 	private Vector2 originalPos;
+	
+	//This should probably be updated to be a part of the event system.
+	//That means the calls in update become more complex and use GameEventsManager.
 
 	//Start sets the initial text on the UI.
 	private void Start()

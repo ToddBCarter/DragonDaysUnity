@@ -8,6 +8,7 @@ public class GameEventsManager : MonoBehaviour
 	public static GameEventsManager instance { get; private set; }
 
     public DialogueEvents dialogueEvents;
+	public PlayerEvents playerEvents;
 
 	private void Awake()
 	{
@@ -19,5 +20,6 @@ public class GameEventsManager : MonoBehaviour
 
 		//Debug.Log("Gameeventsmanager test");
 		dialogueEvents = new DialogueEvents();
+		playerEvents = new PlayerEvents();
 	}
 }

@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - OrangeTorchEnemy
   - DialogueBox
+  - WoodenPlank
   layers:
   - Default
   - TransparentFX

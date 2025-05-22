@@ -64,6 +64,10 @@ public class DialogueEvents
 		}
 	}
 
+	//The benefit to the C# events seems dubious.
+	//These would be the most useful if there were multiple scripts that called them.
+	//For example, separate NPC managers that each called start/stophostility.
+	//Maybe 
 	public event Action startHostility;
 
 	public void StartHostility()

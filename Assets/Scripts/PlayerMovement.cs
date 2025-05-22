@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
 	private bool isKnockedBack;
 
 	public PlayerCombat playerCombat;
+	
+	//This should probably be updated to be a part of the event system.
+	//That means the calls in update become more complex and use GameEventsManager.
 
 	//Update currently used to acquire player attack input, as set in 
 	// Edit -> Project Manager -> Input Manager -> Axes
@@ -44,11 +47,11 @@ public class PlayerMovement : MonoBehaviour
 				Flip();
 			}
 
-			//anim.SetFloat("horizontal", Mathf.Abs(horizontal));
-			//anim.SetFloat("vertical", Mathf.Abs(vertical));
+			anim.SetFloat("horizontal", Mathf.Abs(horizontal));
+			anim.SetFloat("vertical", Mathf.Abs(vertical));
 			
-			anim.SetFloat("horizontal", horizontal); //This gives -1 to 1 for x
-			anim.SetFloat("vertical", vertical); //This gives -1 to 1 for y
+			//anim.SetFloat("horizontal", horizontal); //This gives -1 to 1 for x
+			//anim.SetFloat("vertical", vertical); //This gives -1 to 1 for y
 			
 			rb.linearVelocity = new Vector2(horizontal, vertical) * speed;
 		}

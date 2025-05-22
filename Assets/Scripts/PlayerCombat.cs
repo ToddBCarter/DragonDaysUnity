@@ -12,7 +12,10 @@ public class PlayerCombat : MonoBehaviour
     public Animator anim;
 
 	public float cooldown = 0.5f;
-	private float timer; //This var is for cooldown timing between attack animations.
+	private float timer; //This var is for cooldown timing between attack animations
+	
+	//This should probably be updated to be a part of the C# event system.
+	//That means the calls in update become more complex and use GameEventsManager.
 
 	//Update is currently used for decreasing cooldown timer.
 	private void Update()
@@ -53,7 +56,7 @@ public class PlayerCombat : MonoBehaviour
 
 		if(enemies.Length > 0)
 		{
-			enemies[0].GetComponent<NPCManager>().displayDialogueBox();
+			enemies[0].GetComponent<NPCController>().displayDialogueBox();
             enemies[0].GetComponent<NPCDialogueTrigger>().TriggerDialogue();
 		}
 	}
