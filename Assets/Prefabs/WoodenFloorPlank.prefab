@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7105963276826668861}
   - component: {fileID: 3155087214576925710}
   - component: {fileID: 388099517156133361}
+  - component: {fileID: -5902008033912918841}
   m_Layer: 0
   m_Name: WoodenFloorPlank
   m_TagString: WoodenPlank
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 653484357
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 5
   m_Sprite: {fileID: 5850365882988779690, guid: 1081d11af67139a458aad77c97c41685, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -134,3 +135,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.56, y: 0.52484846}
   m_EdgeRadius: 0
+--- !u!114 &-5902008033912918841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743570861931690918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2578e77432a5d4d9635be701f74737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landBoundary: {fileID: 0}
+  openAir: {fileID: 0}
