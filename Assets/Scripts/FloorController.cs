@@ -56,6 +56,9 @@ public class FloorController : MonoBehaviour
     }
 
     // Detect when the player leaves the floor, the tilemap should return, allowing them to fall
+	//This currently is killing the player when they step off a floor and onto a moving platform.
+	//Which raises the need for a TilemapManager which will keep track of floorContactCount
+	//and allow moving plaforms to add to the count.
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))

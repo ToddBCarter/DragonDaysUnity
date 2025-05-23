@@ -8,6 +8,8 @@ TagManager:
   - OrangeTorchEnemy
   - DialogueBox
   - WoodenPlank
+  - Open_Air
+  - Land_Boundary
   layers:
   - Default
   - TransparentFX
@@ -53,6 +55,9 @@ TagManager:
     locked: 0
   - name: NPCs
     uniqueID: 41630221
+    locked: 0
+  - name: TilemapHigh
+    uniqueID: 2770516491
     locked: 0
   m_RenderingLayers:
   - Default
