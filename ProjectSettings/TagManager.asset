@@ -45,5 +45,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Flooring
+    uniqueID: 653484357
+    locked: 0
+  - name: Player
+    uniqueID: 2350092305
+    locked: 0
+  - name: NPCs
+    uniqueID: 41630221
+    locked: 0
   m_RenderingLayers:
   - Default

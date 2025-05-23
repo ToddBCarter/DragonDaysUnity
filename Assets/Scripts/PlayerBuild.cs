@@ -17,34 +17,49 @@ public class PlayerBuild : MonoBehaviour
 			if(!IsSpaceOccupied(gridPos, objectSize))
 			{
 				//Instantiate the object at the snapped grid position
-				Instantiate(objectToPlacePrefab, gridPos, Quaternion.identity);	
+				GameObject newObject = Instantiate(objectToPlacePrefab, gridPos, Quaternion.identity);
+				
 				//Debug.Log("Plank drop test.");
+				
+				//This is Y filtering to guarantee sprites appear in front/behind correctly.
+				//This works by inverting the Y coordinate, making objects with lower Y,
+				//values appear above those with higher Y.
+				//This works along with the sorting layers to keep sprites in place.
+				SpriteRenderer sr = newObject.GetComponent<SpriteRenderer>();
+				if (sr != null)
+				{
+					//Invert Y so lower objects are drawn in front
+					sr.sortingOrder = Mathf.RoundToInt(-gridPos.y * 10); // Multiply for more granularity
+				}
 			}
         }
 	}
 	
 	Vector2 GetPrefabSize(GameObject prefab)
 	{
+		GameObject temp = Instantiate(prefab); //Temporary object to get accurate size
+		temp.SetActive(false);
+		
 		Collider2D col = prefab.GetComponent<Collider2D>();
+		Vector2 size = Vector2.one; //Set as default
+		
 		if (col != null)
 		{
-			//
-			//Adjusting the size of the box collider allows for some overlap... sort of
 			if(col is BoxCollider2D box)
 			{
-				Debug.Log("Prefab size collider test " + box.size.x);
-				Debug.Log("Prefab size collider test " + box.size.y);
-				return box.size;
+				size = box.size;
+				//Debug.Log("Box collider.");
 			}
+			else
+			{
+				size = col.bounds.size; //Get the size of the collider directly
+			}
+			//Debug.Log("Prefab size collider test x " + size.x);
+			//Debug.Log("Prefab size collider test y " + size.y);			
 		}
 		
-		SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
-		if (sr != null)
-		{
-			return sr.bounds.size;
-		}
-		
-		return Vector2.one; //Default if no renderer
+		DestroyImmediate(temp); //Cleanup
+		return size;
 	}
 	
     Vector2 SnapToGrid(Vector2 rawWorldPos, Vector2 size)
@@ -73,15 +88,32 @@ public class PlayerBuild : MonoBehaviour
 	private bool IsSpaceOccupied(Vector2 position, Vector2 size)
 	{
 		Vector2 adjustedSize = size * 0.9f;
-		Collider2D hit = Physics2D.OverlapBox(position, adjustedSize, 0f);
+		//Collider2D hit = Physics2D.OverlapBox(position, adjustedSize, 0f);
 		
-		//Debug.Log("Space occupy test");
-		//Debug.Log("Hit x coord is " + hit.size.x);
-		//Debug.Log("Hit y coord is " + hit.size.y);
-		
+		Collider2D[] hits = Physics2D.OverlapBoxAll(position, adjustedSize, 0f);
+
+		foreach (Collider2D hit in hits)
+		{		
+			if(hit is BoxCollider2D box)
+			{
+				//Debug.Log("Space occupy test");
+				Debug.Log("Hit x coord is " + box.size.x);
+				Debug.Log("Hit y coord is " + box.size.y);
+			}
+			if (hit.CompareTag("WoodenPlank"))
+			{
+				//Space is considered occupied only if a specific tag is found
+				//return true;
+				//float overlapAmount = 0.5f;
+				//snapPos.y += overlapAmount;
+				Debug.Log("Plank hit.");
+				return true;
+			}
+		}
+			
 		//Collider2D[] objects = Physics2D.OverlapBoxAll(position, adjustedSize, 0f);
 
-		return hit != null;
+		return false;
 	}
 
 
