@@ -12,9 +12,6 @@ public class FloorController : MonoBehaviour
 	void Start()
     {
         // Find the tilemaps
-        //landBoundary = GameObject.Find("Land_Boundary").GetComponent<Tilemap>();
-		//openAir = GameObject.Find("Open_Air").GetComponent<Tilemap>();
-		
 		var allTilemaps = Resources.FindObjectsOfTypeAll<Tilemap>();
 		foreach (Tilemap tilemap in allTilemaps)
 		{

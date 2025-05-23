@@ -6,6 +6,8 @@ public class PlayerBuild : MonoBehaviour
     public GameObject objectToPlacePrefab; //Assign in Inspector; this should change to buttons on menu
     public float gridSize = 1f;
 	
+	//private bool x;
+	
 	private void Update()
 	{		
 		if (Input.GetMouseButtonDown(0)) //Left click
@@ -91,6 +93,10 @@ public class PlayerBuild : MonoBehaviour
 		//Collider2D hit = Physics2D.OverlapBox(position, adjustedSize, 0f);
 		
 		Collider2D[] hits = Physics2D.OverlapBoxAll(position, adjustedSize, 0f);
+		
+		//This boolean prevents collision with ANY colliders,
+		//so no more building over terrain or whatever.
+		bool x = false;
 
 		foreach (Collider2D hit in hits)
 		{		
@@ -107,13 +113,14 @@ public class PlayerBuild : MonoBehaviour
 				//float overlapAmount = 0.5f;
 				//snapPos.y += overlapAmount;
 				Debug.Log("Plank hit.");
-				return true;
+				//return true;
 			}
+			x = true;
 		}
 			
 		//Collider2D[] objects = Physics2D.OverlapBoxAll(position, adjustedSize, 0f);
 
-		return false;
+		return x;
 	}
 
 
