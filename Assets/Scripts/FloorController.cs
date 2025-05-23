@@ -7,6 +7,8 @@ public class FloorController : MonoBehaviour
     private Tilemap openAir;	
     private Rigidbody2D _playerRigidbody;
 	
+	private static int floorContactCount;
+	
 	void Start()
     {
         // Find the tilemaps
@@ -20,14 +22,24 @@ public class FloorController : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             _playerRigidbody = collider.GetComponent<Rigidbody2D>();
-            if (landBoundary != null && landBoundary.gameObject.activeSelf)
-            {
-                landBoundary.gameObject.SetActive(false); // Hide the tilemap layer
-            }
-			if (openAir != null && openAir.gameObject.activeSelf)
-            {
-                openAir.gameObject.SetActive(false); // Hide the tilemap layer
-            }
+			
+			//Keep track of the floor count so as to protect the player moving from
+			//one collider to the next.
+			floorContactCount++;
+			
+			if (floorContactCount == 1)
+			{
+							
+				if (landBoundary != null && landBoundary.gameObject.activeSelf)
+				{
+					landBoundary.gameObject.SetActive(false); // Hide the tilemap layer
+				}
+				if (openAir != null && openAir.gameObject.activeSelf)
+				{
+					openAir.gameObject.SetActive(false); // Hide the tilemap layer
+				}
+				
+			}
         }        
     }
 
@@ -40,14 +52,20 @@ public class FloorController : MonoBehaviour
             {
                 _playerRigidbody = null;
             }
-            if (landBoundary != null && !landBoundary.gameObject.activeSelf)
-            {
-                landBoundary.gameObject.SetActive(true); // Show the tilemap layer
-            }
-			if (openAir != null && !openAir.gameObject.activeSelf)
-            {
-                openAir.gameObject.SetActive(true); // Hide the tilemap layer
-            }
+			
+			floorContactCount = Mathf.Max(0, floorContactCount - 1);
+			
+			if(floorContactCount == 0)
+			{
+				if (landBoundary != null && !landBoundary.gameObject.activeSelf)
+				{
+					landBoundary.gameObject.SetActive(true); // Show the tilemap layer
+				}
+				if (openAir != null && !openAir.gameObject.activeSelf)
+				{
+					openAir.gameObject.SetActive(true); // Hide the tilemap layer
+				}
+			}
         }        
     }
 }
