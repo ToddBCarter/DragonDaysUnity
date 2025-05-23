@@ -3,8 +3,8 @@ using UnityEngine.Tilemaps;
 
 public class FloorController : MonoBehaviour
 {
-    private Tilemap landBoundary;
-    private Tilemap openAir;	
+    [SerializeField] private Tilemap landBoundary;
+    [SerializeField] private Tilemap openAir;	
     private Rigidbody2D _playerRigidbody;
 	
 	private static int floorContactCount;
@@ -12,8 +12,21 @@ public class FloorController : MonoBehaviour
 	void Start()
     {
         // Find the tilemaps
-        landBoundary = GameObject.Find("Land_Boundary").GetComponent<Tilemap>();
-		openAir = GameObject.Find("Open_Air").GetComponent<Tilemap>();
+        //landBoundary = GameObject.Find("Land_Boundary").GetComponent<Tilemap>();
+		//openAir = GameObject.Find("Open_Air").GetComponent<Tilemap>();
+		
+		var allTilemaps = Resources.FindObjectsOfTypeAll<Tilemap>();
+		foreach (Tilemap tilemap in allTilemaps)
+		{
+			if (tilemap.name == "Open_Air")
+			{
+				openAir = tilemap;
+			}
+			if (tilemap.name == "Land_Boundary")
+			{
+				landBoundary = tilemap;
+			}			
+		}
     }
 
     // Detect when the player steps onto the floor, the dangerous tilemap should go away
@@ -26,6 +39,8 @@ public class FloorController : MonoBehaviour
 			//Keep track of the floor count so as to protect the player moving from
 			//one collider to the next.
 			floorContactCount++;
+			
+			Debug.Log("Enter floor count is " + floorContactCount);
 			
 			if (floorContactCount == 1)
 			{
@@ -54,6 +69,8 @@ public class FloorController : MonoBehaviour
             }
 			
 			floorContactCount = Mathf.Max(0, floorContactCount - 1);
+			
+			Debug.Log("Exit floor count is " + floorContactCount);
 			
 			if(floorContactCount == 0)
 			{
