@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class PlayerBuild : MonoBehaviour
 {
@@ -11,7 +12,14 @@ public class PlayerBuild : MonoBehaviour
 	//private bool x;
 	
 	private void Update()
-	{		
+	{
+		//Use unity event system to check if pointer is over a UI element,
+		//and block if so.
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			return;
+		}
+
 		if (Input.GetMouseButtonDown(0)) //Left click
         {
 			//This needs to change a bit for dynamic/snapping placement.
@@ -126,7 +134,7 @@ public class PlayerBuild : MonoBehaviour
 
 		if (closest != null)
 		{
-			//Vector2 size = GetPrefabSize(objectToPlacePrefab);
+			Vector2 size = GetPrefabSize(objectToPlacePrefab);
 					
 			BoxCollider2D box = closest.GetComponent<BoxCollider2D>();
 			if(box != null)
@@ -172,25 +180,34 @@ public class PlayerBuild : MonoBehaviour
 
 			
 			//Find a different offset for different tags using an if statement
-			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenPlank")){
+			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenPlank"))
+			{
 				//Calculate the offset and add it to the basePos
 				offset = new Vector2(dir.x * closestSize.x, dir.y * closestSize.y);
 			}
-			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenWall")){				
+			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenWall"))
+			{				
 				//Calculate the offset and add it to the basePos
 				//offset = new Vector2(0f, dir.y * size.y / 2f);
 				
-				// Snap top or bottom
-				offset.y = Mathf.Sign(diff.y) * (closestSize.y / 2f);
+				//Snap top or bottom:
+				//offset.y = Mathf.Sign(diff.y) * (closestSize.y / 2f);
+				
+				//Snap just to bottom:
+				offset.y = -(closestSize.y / 2f);
+			}
+			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenWall"))
+			{
+				// Snap left or right
+				offset.x = Mathf.Sign(diff.x) * closestSize.x;
+			}
+			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenPlank"))
+			{
+				// Snap left or right
+				//offset.x = Mathf.Sign(diff.x) * closestSize.x;
+				offset.y = (size.y / 2f);
 			}
 				
-			//HOWEVER
-			//This NEEDS a way to change what prefab is being used.
-			//So
-			//Button time...?
-			
-			
-			
 			return basePos + offset;
 		}
 
@@ -225,12 +242,22 @@ public class PlayerBuild : MonoBehaviour
 				//float overlapAmount = 0.5f;
 				//snapPos.y += overlapAmount;
 				Debug.Log("Plank hit.");
-				//return true;
-				x = true;
+				
+				//Let walls be placed regardless if there is a plank.
+				//Different kinds of planks may all be able to use a universal tag?
+				if(objectToPlacePrefab.CompareTag("WoodenWall"))
+				{
+					x = false;
+				}
+				else
+				{
+					x = true;
+				}
 			}
 			if(hit.CompareTag("WoodenWall"))
 			{
 				Debug.Log("Wall hit.");
+				//This lets planks be placed regardless of a wall being present.
 				if(objectToPlacePrefab.CompareTag("WoodenPlank"))
 				{
 					x = false;

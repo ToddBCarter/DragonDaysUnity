@@ -22,7 +22,7 @@ public class FloorController : MonoBehaviour
 			if (tilemap.name == "Land_Boundary")
 			{
 				landBoundary = tilemap;
-			}			
+			}
 		}
     }
 
