@@ -107,11 +107,13 @@ public class PlayerBuild : MonoBehaviour
 		Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, snapRange);
 		Collider2D closest = null;
 		float closestDist = Mathf.Infinity;
+		Vector2 closestSize = Vector2.zero;
 
 		//Compare hits from overlap circle for closest distance
 		foreach (var hit in hits)
 		{
-			if (hit.CompareTag(objectToPlacePrefab.tag))
+			//This method would require a list of tags... if it even works
+			if (hit.CompareTag("WoodenPlank") || hit.CompareTag("WoodenWall"))
 			{
 				float dist = Vector2.Distance(mousePos, hit.transform.position);
 				if (dist < closestDist)
@@ -124,7 +126,16 @@ public class PlayerBuild : MonoBehaviour
 
 		if (closest != null)
 		{
-			Vector2 size = GetPrefabSize(objectToPlacePrefab);
+			//Vector2 size = GetPrefabSize(objectToPlacePrefab);
+					
+			BoxCollider2D box = closest.GetComponent<BoxCollider2D>();
+			if(box != null)
+			{
+				closestSize = box.size;
+			}
+			
+			//Vector2 closestSize = GetPrefabSize(hit);
+			
 			Vector2 basePos = closest.transform.position;
 			Vector2 diff = mousePos - basePos;
 			Vector2 offset = Vector2.zero;
@@ -132,8 +143,8 @@ public class PlayerBuild : MonoBehaviour
 			//Get the direction of the detected object, then
 			//normalize the direction for a snap effect
 			Vector2 dir = new Vector2(
-				Mathf.RoundToInt(diff.x / size.x),
-				Mathf.RoundToInt(diff.y / size.y)
+				Mathf.RoundToInt(diff.x / closestSize.x),
+				Mathf.RoundToInt(diff.y / closestSize.y)
 			);
 
 			//Clamp to -1, 0, 1 to avoid large jumps
@@ -159,12 +170,19 @@ public class PlayerBuild : MonoBehaviour
 				offset.y = Mathf.Sign(diff.y) * size.y;
 			}Frankenstein this for above/below positioning.*/
 
-			//Calculate the offset and add it to the basePos
-			offset = new Vector2(dir.x * size.x, dir.y * size.y);
 			
 			//Find a different offset for different tags using an if statement
-			//if(objectToPlacePrefab.CompareTag("WoodenPlank"){
-			//if(objectToPlacePrefab.CompareTag("WoodenWall"){
+			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenPlank")){
+				//Calculate the offset and add it to the basePos
+				offset = new Vector2(dir.x * closestSize.x, dir.y * closestSize.y);
+			}
+			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenWall")){				
+				//Calculate the offset and add it to the basePos
+				//offset = new Vector2(0f, dir.y * size.y / 2f);
+				
+				// Snap top or bottom
+				offset.y = Mathf.Sign(diff.y) * (closestSize.y / 2f);
+			}
 				
 			//HOWEVER
 			//This NEEDS a way to change what prefab is being used.
@@ -208,8 +226,20 @@ public class PlayerBuild : MonoBehaviour
 				//snapPos.y += overlapAmount;
 				Debug.Log("Plank hit.");
 				//return true;
+				x = true;
 			}
-			x = true;
+			if(hit.CompareTag("WoodenWall"))
+			{
+				Debug.Log("Wall hit.");
+				if(objectToPlacePrefab.CompareTag("WoodenPlank"))
+				{
+					x = false;
+				}
+				else
+				{
+					x = true;
+				}
+			}
 		}
 			
 		//Collider2D[] objects = Physics2D.OverlapBoxAll(position, adjustedSize, 0f);

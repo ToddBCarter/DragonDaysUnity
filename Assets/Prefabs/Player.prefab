@@ -449,8 +449,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1944874991
+  m_SortingLayer: 2
   m_SortingOrder: 10
   m_Sprite: {fileID: 2021188800, guid: 77cec4cdd5cfbf24083bb29782853902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -543,6 +543,7 @@ MonoBehaviour:
   facingDirection: 1
   rb: {fileID: 7381848529102659467}
   anim: {fileID: 7886905361296321409}
+  sr: {fileID: 0}
   playerCombat: {fileID: 420353679314123433}
 --- !u!95 &7886905361296321409
 Animator:

@@ -10,6 +10,7 @@ TagManager:
   - WoodenPlank
   - Open_Air
   - Land_Boundary
+  - WoodenWall
   layers:
   - Default
   - TransparentFX
