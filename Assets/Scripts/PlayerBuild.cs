@@ -6,15 +6,24 @@ public class PlayerBuild : MonoBehaviour
     public GameObject objectToPlacePrefab; //Assign in Inspector; this should change to buttons on menu
     public float gridSize = 1f;
 	
+	private float snapRange = 2f;
+	
 	//private bool x;
 	
 	private void Update()
 	{		
 		if (Input.GetMouseButtonDown(0)) //Left click
         {
+			//This needs to change a bit for dynamic/snapping placement.
+			//SnapToGrid needs to check if its within range of a snap point.
+			//Then it needs to determine which snap position is the closest.
+			//			
+			
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 objectSize = GetPrefabSize(objectToPlacePrefab);
-            Vector2 gridPos = SnapToGrid(mouseWorldPos, objectSize);
+            //Vector2 gridPos = SnapToGrid(mouseWorldPos, objectSize);
+			
+			Vector2 gridPos = GetSnapPosition(mouseWorldPos);
 
 			if(!IsSpaceOccupied(gridPos, objectSize))
 			{
@@ -64,6 +73,9 @@ public class PlayerBuild : MonoBehaviour
 		return size;
 	}
 	
+	//
+	//This function is useful for aligning to a world grid.
+	//
     Vector2 SnapToGrid(Vector2 rawWorldPos, Vector2 size)
     {
         float x = Mathf.Round(rawWorldPos.x / size.x) * size.x;
@@ -77,7 +89,7 @@ public class PlayerBuild : MonoBehaviour
 		{
 			if (hit.CompareTag("WoodenPlank")) // Replace with the tag you care about
 			{
-				// Space is considered occupied only if a specific tag is found
+				//Space is considered occupied only if a specific tag is found
 				//return true;
 				float overlapAmount = 0.5f;
 				snapPos.y += overlapAmount;
@@ -86,6 +98,62 @@ public class PlayerBuild : MonoBehaviour
 		
         return snapPos;
     }
+	
+	//
+	//This function dynamically snaps an object to a detected object by tag
+	//
+	Vector2 GetSnapPosition(Vector2 mousePos)
+	{
+		Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, snapRange);
+		Collider2D closest = null;
+		float closestDist = Mathf.Infinity;
+
+		//Compare hits from overlap circle for closest distance
+		foreach (var hit in hits)
+		{
+			if (hit.CompareTag(objectToPlacePrefab.tag))
+			{
+				float dist = Vector2.Distance(mousePos, hit.transform.position);
+				if (dist < closestDist)
+				{
+					closest = hit;
+					closestDist = dist;
+				}
+			}
+		}
+
+		if (closest != null)
+		{
+			Vector2 size = GetPrefabSize(objectToPlacePrefab);
+			Vector2 basePos = closest.transform.position;
+			Vector2 diff = mousePos - basePos;
+
+			//Get the direction of the detected object
+			//Normalize the direction for a snap effect
+			Vector2 dir = new Vector2(
+				Mathf.RoundToInt(diff.x / size.x),
+				Mathf.RoundToInt(diff.y / size.y)
+			);
+
+			//Clamp to -1, 0, 1 to avoid large jumps
+			dir.x = Mathf.Clamp(dir.x, -1, 1);
+			dir.y = Mathf.Clamp(dir.y, -1, 1);
+
+			//If no direction detected (mouse is directly over), default to placing above
+			if (dir == Vector2.zero)
+			{
+				dir = Vector2.up; //shorthand 0,1
+			}
+
+			//Position the new offset
+			Vector2 offset = new Vector2(dir.x * size.x, dir.y * size.y);
+			return basePos + offset;
+		}
+
+		//If no nearby plank, just return the mouse position (or optionally SnapToGrid fallback)
+		//return SnapToGrid(mousePos, GetPrefabSize(objectToPlacePrefab));
+		return mousePos;
+	}
 
 	private bool IsSpaceOccupied(Vector2 position, Vector2 size)
 	{
@@ -131,7 +199,10 @@ public class PlayerBuild : MonoBehaviour
 
 		Vector2 size = GetPrefabSize(objectToPlacePrefab);
 		Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector2 gridPos = SnapToGrid(mouseWorldPos, size);
+		
+		//Instead of snap to grid, need a dynamic option
+		//Vector2 gridPos = SnapToGrid(mouseWorldPos, size);
+		Vector2 gridPos = GetSnapPosition(mouseWorldPos);
 		Vector2 adjustedSize = size * 0.9f;
 
 		Gizmos.color = Color.green;
