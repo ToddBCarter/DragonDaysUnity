@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 	public int facingDirection = 1;
 	public Rigidbody2D rb;
 	public Animator anim;
+	public SpriteRenderer sr;
 
 	private bool isKnockedBack;
 
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 		{
 			playerCombat.activateEnemy();
 		}
+		
+		sr.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100); //Multiply for more granularity
 	}
 
 

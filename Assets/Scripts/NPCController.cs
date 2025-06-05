@@ -26,6 +26,8 @@ public class NPCController : MonoBehaviour
 	private Animator anim;
 
 	public bool isHostile;
+	
+	public SpriteRenderer sr;  //sprite renderer to manage y filtering
 
     //Start is currently being used to:
 	// - find rigidbody component
@@ -105,6 +107,10 @@ public class NPCController : MonoBehaviour
 				rb.linearVelocity = Vector2.zero;
 			}
 		}
+		
+		//Y filter the sprites on the sorting layer based on position
+		sr.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100); //Multiply for more granularity
+	
     }
 
 	//Quality of life functions for changing hostility.

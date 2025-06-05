@@ -24,14 +24,14 @@ public class PlayerBuild : MonoBehaviour
 				//Debug.Log("Plank drop test.");
 				
 				//This is Y filtering to guarantee sprites appear in front/behind correctly.
-				//This works by inverting the Y coordinate, making objects with lower Y,
-				//values appear above those with higher Y.
+				//This works by inverting the Y coordinate, making objects with lower Y
+				//values appear on higher layers than those with higher Y.
 				//This works along with the sorting layers to keep sprites in place.
 				SpriteRenderer sr = newObject.GetComponent<SpriteRenderer>();
 				if (sr != null)
 				{
 					//Invert Y so lower objects are drawn in front
-					sr.sortingOrder = Mathf.RoundToInt(-gridPos.y * 10); // Multiply for more granularity
+					sr.sortingOrder = Mathf.RoundToInt(-gridPos.y * 100); //Multiply for more granularity
 				}
 			}
         }
