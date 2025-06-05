@@ -162,7 +162,14 @@ public class PlayerBuild : MonoBehaviour
 			//Calculate the offset and add it to the basePos
 			offset = new Vector2(dir.x * size.x, dir.y * size.y);
 			
-			//Find a different offset for different tags
+			//Find a different offset for different tags using an if statement
+			//if(objectToPlacePrefab.CompareTag("WoodenPlank"){
+			//if(objectToPlacePrefab.CompareTag("WoodenWall"){
+				
+			//HOWEVER
+			//This NEEDS a way to change what prefab is being used.
+			//So
+			//Button time...?
 			
 			
 			
@@ -226,5 +233,10 @@ public class PlayerBuild : MonoBehaviour
 
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireCube(gridPos, adjustedSize);
+	}
+	
+	public void SetObjectToPlace(GameObject newPrefab)
+	{
+		objectToPlacePrefab = newPrefab;
 	}
 }
