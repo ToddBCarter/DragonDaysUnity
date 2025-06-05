@@ -127,15 +127,18 @@ public class PlayerBuild : MonoBehaviour
 			Vector2 size = GetPrefabSize(objectToPlacePrefab);
 			Vector2 basePos = closest.transform.position;
 			Vector2 diff = mousePos - basePos;
+			Vector2 offset = Vector2.zero;
 
-			//Get the direction of the detected object
-			//Normalize the direction for a snap effect
+			//Get the direction of the detected object, then
+			//normalize the direction for a snap effect
 			Vector2 dir = new Vector2(
 				Mathf.RoundToInt(diff.x / size.x),
 				Mathf.RoundToInt(diff.y / size.y)
 			);
 
 			//Clamp to -1, 0, 1 to avoid large jumps
+			//This becomes a multiplier for the size of the object to create the offset
+			//This effectively creates local grid positioning for the snap effect
 			dir.x = Mathf.Clamp(dir.x, -1, 1);
 			dir.y = Mathf.Clamp(dir.y, -1, 1);
 
@@ -144,9 +147,25 @@ public class PlayerBuild : MonoBehaviour
 			{
 				dir = Vector2.up; //shorthand 0,1
 			}
+			
+			/*if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+			{
+				// Snap left or right
+				offset.x = Mathf.Sign(diff.x) * size.x;
+			}
+			else
+			{
+				// Snap top or bottom
+				offset.y = Mathf.Sign(diff.y) * size.y;
+			}Frankenstein this for above/below positioning.*/
 
-			//Position the new offset
-			Vector2 offset = new Vector2(dir.x * size.x, dir.y * size.y);
+			//Calculate the offset and add it to the basePos
+			offset = new Vector2(dir.x * size.x, dir.y * size.y);
+			
+			//Find a different offset for different tags
+			
+			
+			
 			return basePos + offset;
 		}
 
