@@ -167,7 +167,9 @@ public class PlayerBuild : MonoBehaviour
 				dir = Vector2.up; //shorthand 0,1
 			}
 			
-			/*if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+			/*
+			
+			if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
 			{
 				// Snap left or right
 				offset.x = Mathf.Sign(diff.x) * size.x;
@@ -176,7 +178,9 @@ public class PlayerBuild : MonoBehaviour
 			{
 				// Snap top or bottom
 				offset.y = Mathf.Sign(diff.y) * size.y;
-			}Frankenstein this for above/below positioning.*/
+			}
+			
+			Frankenstein this for above/below positioning.*/
 
 			
 			//Find a different offset for different tags using an if statement
@@ -194,7 +198,7 @@ public class PlayerBuild : MonoBehaviour
 				//offset.y = Mathf.Sign(diff.y) * (closestSize.y / 2f);
 				
 				//Snap just to bottom:
-				offset.y = -(closestSize.y / 2f);
+				offset.y = -(closestSize.y / 2f) - (size.y / 2f);
 			}
 			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenWall"))
 			{
@@ -203,11 +207,10 @@ public class PlayerBuild : MonoBehaviour
 			}
 			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenPlank"))
 			{
-				// Snap left or right
 				//offset.x = Mathf.Sign(diff.x) * closestSize.x;
-				offset.y = (size.y / 2f);
+				offset.y = (size.y / 2f) + (closestSize.y / 2f);
 			}
-				
+			
 			return basePos + offset;
 		}
 
