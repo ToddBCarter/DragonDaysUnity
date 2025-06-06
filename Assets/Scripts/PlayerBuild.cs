@@ -8,6 +8,8 @@ public class PlayerBuild : MonoBehaviour
     public float gridSize = 1f;
 	
 	//These two variables need to be connected to the PrefabManager and made private.
+	//These may be reassigned by the onscreen build menu.
+	//Probably a script that changes them when a new material is selected.
 	public GameObject currentSideWall;
 	public GameObject currentForwardWall;
 	
@@ -256,8 +258,8 @@ public class PlayerBuild : MonoBehaviour
 			if(hit is BoxCollider2D box)
 			{
 				//Debug.Log("Space occupy test");
-				Debug.Log("Hit x coord is " + box.size.x);
-				Debug.Log("Hit y coord is " + box.size.y);
+				Debug.Log("Hit box x coord is " + box.size.x);
+				Debug.Log("Hit box y coord is " + box.size.y);
 			}
 			if (hit.CompareTag("WoodenPlank"))
 			{
@@ -282,7 +284,7 @@ public class PlayerBuild : MonoBehaviour
 			{
 				Debug.Log("Wall hit.");
 				//This lets planks be placed regardless of a wall being present.
-				if(objectToPlacePrefab.CompareTag("WoodenPlank"))
+				if(objectToPlacePrefab.CompareTag("WoodenPlank") || objectToPlacePrefab.CompareTag("WoodenWall"))
 				{
 					x = false;
 				}
