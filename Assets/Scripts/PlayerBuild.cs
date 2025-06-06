@@ -207,8 +207,10 @@ public class PlayerBuild : MonoBehaviour
 			}
 			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenPlank"))
 			{
-				//offset.x = Mathf.Sign(diff.x) * closestSize.x;
-				offset.y = (size.y / 2f) + (closestSize.y / 2f);
+				//To get this to snap to the base of a plank as well,
+				//There needs to be an offset added only when negative on Mathf.Sign(diff.y).
+				//offset.y = Mathf.Sign(diff.y) * ((size.y / 2f) + (closestSize.y / 2f));
+				offset.y = ((size.y / 2f) + (closestSize.y / 2f));
 			}
 			
 			return basePos + offset;
