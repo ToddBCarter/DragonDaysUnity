@@ -4,8 +4,12 @@ using UnityEngine.EventSystems;
 
 public class PlayerBuild : MonoBehaviour
 {
-    public GameObject objectToPlacePrefab; //Assign in Inspector; this should change to buttons on menu
+    public GameObject objectToPlacePrefab; //Assign default in Inspector; buttons on menu
     public float gridSize = 1f;
+	
+	//These two variables need to be connected to the PrefabManager and made private.
+	public GameObject currentSideWall;
+	public GameObject currentForwardWall;
 	
 	private float snapRange = 2f;
 	
@@ -210,7 +214,22 @@ public class PlayerBuild : MonoBehaviour
 				//To get this to snap to the base of a plank as well,
 				//There needs to be an offset added only when negative on Mathf.Sign(diff.y).
 				//offset.y = Mathf.Sign(diff.y) * ((size.y / 2f) + (closestSize.y / 2f));
-				offset.y = ((size.y / 2f) + (closestSize.y / 2f));
+				
+				//offset.y = ((size.y / 2f) + (closestSize.y / 2f));
+				
+				if(Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+				{
+					//Snap left or right
+					offset.x = Mathf.Sign(diff.x) * (closestSize.x / 2f);
+					offset.y = (size.y / 4f) - (closestSize.y / 2f);
+					objectToPlacePrefab = currentSideWall;
+				}
+				else
+				{
+					//Snap top
+					offset.y = ((size.y / 2f) + (closestSize.y / 2f));
+					objectToPlacePrefab = currentForwardWall;
+				}
 			}
 			
 			return basePos + offset;
