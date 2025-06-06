@@ -6,6 +6,8 @@ using System.Collections.Generic;
 //Might be better to have it provide a way to change
 //the current build options, such as material type.
 //
+//This may be better for the Build Menu, as this may
+//organize the assignments.
 public class PrefabManager : MonoBehaviour
 {
 	[System.Serializable]
