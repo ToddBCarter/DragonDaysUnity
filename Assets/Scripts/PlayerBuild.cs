@@ -27,11 +27,7 @@ public class PlayerBuild : MonoBehaviour
 		}
 
 		if (Input.GetMouseButtonDown(0)) //Left click
-        {
-			//This needs to change a bit for dynamic/snapping placement.
-			//SnapToGrid needs to check if its within range of a snap point.
-			//Then it needs to determine which snap position is the closest.
-			//			
+        {		
 			
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 objectSize = GetPrefabSize(objectToPlacePrefab);
@@ -115,6 +111,7 @@ public class PlayerBuild : MonoBehaviour
 	
 	//
 	//This function dynamically snaps an object to a detected object by tag
+	//(This one is being used over SnapToGrid()).
 	//
 	Vector2 GetSnapPosition(Vector2 mousePos)
 	{
@@ -189,7 +186,10 @@ public class PlayerBuild : MonoBehaviour
 			Frankenstein this for above/below positioning.*/
 
 			
+			//
 			//Find a different offset for different tags using an if statement
+			//These offsets place the prefabs that are being snapped.
+			//
 			if(objectToPlacePrefab.CompareTag("WoodenPlank") && closest.CompareTag("WoodenPlank"))
 			{
 				//Calculate the offset and add it to the basePos
@@ -206,9 +206,10 @@ public class PlayerBuild : MonoBehaviour
 				//Snap just to bottom:
 				offset.y = -(closestSize.y / 2f) - (size.y / 2f);
 			}
+			
 			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenWall"))
 			{
-				// Snap left or right
+				//Snap left or right
 				offset.x = Mathf.Sign(diff.x) * closestSize.x;
 			}
 			if(objectToPlacePrefab.CompareTag("WoodenWall") && closest.CompareTag("WoodenPlank"))
@@ -219,6 +220,8 @@ public class PlayerBuild : MonoBehaviour
 				
 				//offset.y = ((size.y / 2f) + (closestSize.y / 2f));
 				
+				//This segment chooses which wall prefab is used based on
+				//where the mouse is located and snaps it into place.
 				if(Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
 				{
 					//Snap left or right
