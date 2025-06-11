@@ -226,7 +226,7 @@ public class PlayerBuild : MonoBehaviour
 				{
 					//Snap left or right  change something
 					offset.x = Mathf.Sign(diff.x) * (closestSize.x / 2f);
-					offset.y = (size.y / 4f) + 0.15f; //This has to be a really weird, custom fit due to the way planks overlap
+					offset.y = (size.y / 4f) + 0.15f; //This has to be a really weird magic number due to the way planks overlap
 					objectToPlacePrefab = currentSideWall;
 				}
 				else
