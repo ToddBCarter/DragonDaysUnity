@@ -11,6 +11,8 @@ TagManager:
   - Open_Air
   - Land_Boundary
   - WoodenWall
+  - BottomStairCollider
+  - TopStairCollider
   layers:
   - Default
   - TransparentFX

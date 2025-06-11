@@ -4,18 +4,27 @@ using UnityEngine.EventSystems;
 
 public class PlayerBuild : MonoBehaviour
 {
-    public GameObject objectToPlacePrefab; //Assign default in Inspector; buttons on menu
+    private GameObject objectToPlacePrefab; //Assign default in Inspector; buttons on menu
     public float gridSize = 1f;
 	
 	//These two variables need to be connected to the PrefabManager and made private.
 	//These may be reassigned by the onscreen build menu.
 	//Probably a script that changes them when a new material is selected.
-	public GameObject currentSideWall;
-	public GameObject currentForwardWall;
+	private GameObject currentSideWall;
+	private GameObject currentForwardWall;
 	
 	private float snapRange = 2f;
 	
+	public PrefabLibrary prefabLibrary;
+	
 	//private bool x;
+	
+	void Start()
+	{
+		objectToPlacePrefab = prefabLibrary.WoodenPlank;
+		currentSideWall = prefabLibrary.WoodenWallSide;
+		currentForwardWall = prefabLibrary.WoodenWallForward;
+	}
 	
 	private void Update()
 	{
@@ -224,7 +233,7 @@ public class PlayerBuild : MonoBehaviour
 				//where the mouse is located and snaps it into place.
 				if(Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
 				{
-					//Snap left or right  change something
+					//Snap left or right
 					offset.x = Mathf.Sign(diff.x) * (closestSize.x / 2f);
 					offset.y = (size.y / 4f) + 0.15f; //This has to be a really weird magic number due to the way planks overlap
 					objectToPlacePrefab = currentSideWall;
