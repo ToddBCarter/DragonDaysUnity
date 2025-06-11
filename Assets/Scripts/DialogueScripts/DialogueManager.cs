@@ -275,8 +275,9 @@ public class DialogueManager : MonoBehaviour
 	{
 		temp = GameObject.FindWithTag("DialogueBox");
 		//Debug.Log("Weird tag " + temp.tag);
-		//ExitDialogue();
-		dialoguePlaying = false;
+		
+		dialoguePlaying = false; //This allows dialogue to be picked up again after using the X button.
+		
 		temp.SetActive(false);
 		//return;
 	}
