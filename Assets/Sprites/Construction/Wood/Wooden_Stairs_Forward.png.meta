@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a3cea66f3f9dafa4ba1a7ee676e5b0a5
+guid: 013eadd59ec4e9345beeec3f3d5ccf1b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 922771555911899825
-    second: Wooden_Side_Wall_0
+      213: 6370140613312119644
+    second: Wooden_Stairs_Forward_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wooden_Side_Wall_0
+      name: Wooden_Stairs_Forward_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 21
-        height: 350
+        x: 6
+        y: 50
+        width: 186
+        height: 387
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1ba96fe47d75ecc00800000000000000
-      internalID: 922771555911899825
+      spriteID: c5302c92329476850800000000000000
+      internalID: 6370140613312119644
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c20e07eb19d73fe4199b103f26d54a45
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Wooden_Side_Wall_0: 922771555911899825
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
