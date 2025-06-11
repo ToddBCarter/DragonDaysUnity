@@ -104,6 +104,7 @@ public class DialogueManager : MonoBehaviour
 
 		if(dialoguePlaying)
 		{
+			Debug.Log("Dialogue already playing, exiting.");
 			return;
 		}
 		dialoguePlaying = true;
@@ -274,6 +275,8 @@ public class DialogueManager : MonoBehaviour
 	{
 		temp = GameObject.FindWithTag("DialogueBox");
 		//Debug.Log("Weird tag " + temp.tag);
+		//ExitDialogue();
+		dialoguePlaying = false;
 		temp.SetActive(false);
 		//return;
 	}

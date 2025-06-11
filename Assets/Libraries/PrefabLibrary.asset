@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50ea5cd51e2a104285107f2d5aca29e, type: 3}
   m_Name: PrefabLibrary
   m_EditorClassIdentifier: 
-  WoodenWallForward: {fileID: 0}
-  WoodenWallSide: {fileID: 0}
-  WoodenPlank: {fileID: 0}
-  WoodenStairsForward: {fileID: 0}
+  WoodenWallForward: {fileID: 7143040758273918554, guid: d800e4ec2e8180f4da977b285e1da5a7, type: 3}
+  WoodenWallSide: {fileID: 8461749271217181303, guid: 96a839bcfaebc0a4ba017fe7954b54eb, type: 3}
+  WoodenPlank: {fileID: 3743570861931690918, guid: 133fe5eea3b85e74d907c42e13a22dc9, type: 3}
+  WoodenStairsForward: {fileID: 4327447160918241254, guid: 06d24b81e6b45a84cacb50153257b139, type: 3}

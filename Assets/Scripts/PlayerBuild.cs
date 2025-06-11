@@ -15,6 +15,8 @@ public class PlayerBuild : MonoBehaviour
 	
 	private float snapRange = 2f;
 	
+	//PrefabLibrary is a scriptable object that contains a list of relevant prefabs.
+	//They are accessed using their name assigned in PrefabLibrary.
 	public PrefabLibrary prefabLibrary;
 	
 	//private bool x;
